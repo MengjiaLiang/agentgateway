@@ -29,6 +29,8 @@ import { ResponseDisplay } from "@/components/playground/ResponseDisplay";
 // Schema for MCP tool invocation response (kept for MCP)
 const McpToolResponseSchema = z.any();
 
+const HOST: string = "132.220.137.224";
+
 // Define state interfaces
 interface ConnectionState {
   selectedEndpoint: string;
@@ -108,7 +110,7 @@ export default function PlaygroundPage() {
       .map((listener) => {
         let displayEndpoint = "Unknown";
         if (listener.sse) {
-          displayEndpoint = `localhost:${listener.sse.port}`;
+          displayEndpoint = `${HOST}:${listener.sse.port}`;
         }
         return { ...listener, displayEndpoint };
       })
@@ -225,7 +227,7 @@ export default function PlaygroundPage() {
     try {
       if (protocol === ListenerProtocol.MCP || !protocol) {
         setConnectionState((prev) => ({ ...prev, connectionType: "mcp" }));
-        const connectUrl = `${httpProtocol}://localhost:${port}/sse`;
+        const connectUrl = `${httpProtocol}://${HOST}:${port}/sse`;
 
         const client = new McpClient(
           { name: "agentgateway-dashboard", version: "0.1.0" },
@@ -250,7 +252,7 @@ export default function PlaygroundPage() {
         setMcpState((prev) => ({ ...prev, tools: toolsResponse.tools }));
       } else if (protocol === ListenerProtocol.A2A) {
         setConnectionState((prev) => ({ ...prev, connectionType: "a2a" }));
-        const baseUrl = `${httpProtocol}://localhost:${port}/${a2aState.selectedTarget}`;
+        const baseUrl = `${httpProtocol}://${HOST}:${port}/${a2aState.selectedTarget}`;
 
         const client = new A2AClient(baseUrl, headers);
         setA2aState((prev) => ({ ...prev, client }));

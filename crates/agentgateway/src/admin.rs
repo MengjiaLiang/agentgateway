@@ -410,6 +410,14 @@ mod ui {
 					"http://0.0.0.0:19000",
 					"http://127.0.0.1:19000",
 					"http://localhost:19000",
+					"http://0.0.0.0:8081",
+					"http://127.0.0.1:8081",
+					"http://localhost:8081",
+					"http://0.0.0.0:8080",
+					"http://127.0.0.1:8080",
+					"http://localhost:8080",
+					"http://kf-dev-ci-we-8994290-dns.westeurope.cloudapp.azure.com:8080",
+					"http://132.220.137.224:8080",
 				]
 				.map(|origin| origin.parse::<HeaderValue>().unwrap()),
 			)

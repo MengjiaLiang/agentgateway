@@ -1,6 +1,9 @@
 import { Target, Listener, ListenerProtocol } from "./types";
 
-const API_URL = "http://localhost:19000";
+const PROTOCOL: string = process.env.PROTOCOL || "http";
+const HOST: string = process.env.HOST || "kf-dev-ci-we-8994290-dns.westeurope.cloudapp.azure.com";
+const PORT: string = process.env.PORT || "8080";
+const API_URL = `${PROTOCOL}://${HOST}:${PORT}/ui_`;
 
 /**
  * Updates a single target on the MCP proxy server
